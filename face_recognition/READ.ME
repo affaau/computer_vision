@@ -5,3 +5,44 @@ Python 3.5.4
 OpenCV 3.4.0
 Numpy 1.13.3
 Pillow 4.2.1
+
+Ref: http://hanzratech.in/2015/02/03/face-recognition-using-opencv.html
+
+<face_learning.py>
+It is to train a 'recognizer' with a set of faces.
+It is then tested with another faces (not used in the training.
+'recognizer' will compare and try identifying object from the learned faces.
+
+To run,
+$> python face_learning.py [-update]
+
+Learn face detection by using haarcascade file from OpenCV.
+
+OpenCV 'recognizer' is trained with 16 set of faces, each with difference face 
+expression of the same person.
+
+All images with .sad extension are kept for testing use, not used in training.
+
+If -update is given as argument, the trained data of the 16 person are saved and 
+kept externally for future use. 
+
+Finally, the .sad image of each person will be tested against the trained data.
+
+The recognized 'name' will be printed with confidence level. The lower the value, 
+the higher the confidence level.
+
+<face_checking.py>
+Upload trained 'recognizer' data and use it to check faces in a given image.
+
+To run,
+$> python face_checking.py  image_file.extension
+
+Faces from the image are extracted and compare with trained faces.
+The best matched one are shown.
+
+<face_capture_by_cam.py>
+Embedded camera are turned on to capture faces.
+Hold the face steady to record clear image.
+10 images will be taken. Press ESC anytime to abort program.
+The images could be used as faces for recognition in face_learning.py.
+
