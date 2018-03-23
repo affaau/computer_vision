@@ -12,7 +12,8 @@ Including,
 -car,
 -eye,
 -smile,
--color
+-color，
+-pedestrian
 
 The code is simple and self explanatory.
 
