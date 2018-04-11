@@ -14,6 +14,7 @@ Including,
 -smile,
 -color,
 -pedestrian
+-hog_svm_human_detection_2
 
 The code is simple and self explanatory.
 

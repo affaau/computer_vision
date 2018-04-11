@@ -37,7 +37,7 @@ for imagePath in paths.list_images(args["images"]):
  
 	# detect people in the image
 	(rects, weights) = hog.detectMultiScale(image, winStride=(4, 4),
-		padding=(8, 8), scale=1.05)
+		padding=(8, 8), scale=1.03)   # (original) scale=1.05
  
 	# draw the original bounding boxes
 	for (x, y, w, h) in rects:

@@ -5,18 +5,23 @@ import cv2
 import sys
 
 ## training
-#cascPath = './training_data/haarcascade_frontalface_default.xml'
-#cascPath = 'C:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalcatface.xml'
-cascPath = 'C:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml'
+cascPath = './training_data/haarcascade_frontalface_default.xml'
+#cascPath = 'D:\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalcatface.xml'
 faceCascade = cv2.CascadeClassifier(cascPath)
 
-cv2.namedWindow('Video', cv2.WINDOW_AUTOSIZE)
-cap = cv2.VideoCapture(0)
+cv2.namedWindow('Video', cv2.WINDOW_NORMAL)
+# camera
+#cap = cv2.VideoCapture(0)
+
+# video
+cap = cv2.VideoCapture("pano_video.mp4")
 
 while True:
    ## read frame
    ret, frame = cap.read()
-
+   ret, frame = cap.read()
+   ret, frame = cap.read()
+   ret, frame = cap.read()
    ## face detection
    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
    print(gray.shape)
