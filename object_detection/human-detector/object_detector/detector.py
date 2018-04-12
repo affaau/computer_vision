@@ -1,4 +1,6 @@
-'''Modify original code to OpenCV 3 & Python 3'''
+'''Corrected for Python 3 & OpenCV 3
+by: affa
+'''
 import numpy as np 
 from skimage.transform import pyramid_gaussian
 from imutils.object_detection import non_max_suppression
@@ -38,14 +40,18 @@ def detector(filename):
     min_wdw_sz = (64, 128)
     step_size = (10, 10)
     downscale = 1.25
-
+    
+    # Load in trained model
     clf = joblib.load(os.path.join(model_path, 'svm.model'))
 
-    #List to store the detections
+    # List to store the detections
     detections = []
-    #The current scale of the image 
+    # The current scale of the image 
     scale = 0
-
+    
+    # As the size of human is unknown, prediction and
+    # adjust size of sliding windows are required, it usually ends up with multiple
+    # frame on the same human (may look confusing)
     for im_scaled in pyramid_gaussian(im, downscale = downscale):
         #The list contains detections at the current scale
         if im_scaled.shape[0] < min_wdw_sz[1] or im_scaled.shape[1] < min_wdw_sz[0]:
@@ -53,9 +59,9 @@ def detector(filename):
         for (x, y, im_window) in sliding_window(im_scaled, min_wdw_sz, step_size):
             if im_window.shape[0] != min_wdw_sz[1] or im_window.shape[1] != min_wdw_sz[0]:
                 continue
+            # Calculate HOG features
             im_window = color.rgb2gray(im_window)
-            #fd = hog(im_window, orientations, pixels_per_cell, cells_per_block, visualize, normalize)
-            fd = hog(im_window, orientations, pixels_per_cell, cells_per_block)
+            fd = hog(im_window, orientations, pixels_per_cell, cells_per_block, block_norm='L1', visualise=False)
 
             fd = fd.reshape(1, -1)
             pred = clf.predict(fd)
@@ -80,6 +86,7 @@ def detector(filename):
     sc = [score[0] for (x, y, score, w, h) in detections]
     print("sc: ", sc)
     sc = np.array(sc)
+    # Use 'non-max suppression' method to consolidate all the prediction frames
     pick = non_max_suppression(rects, probs = sc, overlapThresh = 0.3)
     print("shape, ", pick.shape)
 
