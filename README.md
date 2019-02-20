@@ -1,4 +1,4 @@
-Tested under:
+Tested with:
 
 - 64-bit Windows 10
 - Python 3.5.4
