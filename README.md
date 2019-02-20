@@ -6,4 +6,4 @@ Tested under:
 - OpenCV 3.4.0
 - Numpy 1.13.3
 
-Upload to bitbucket git repository
+A copy from my bitbucket git repository
